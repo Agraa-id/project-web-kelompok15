@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MotoCare membantu pemilik motor mencatat dan mengingat jadwal perawatan kendaraan.">
+  <title>MotoCare | Vehicle Maintenance Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#beranda" aria-label="MotoCare beranda">
+        <span class="brand-mark">M</span>
+        <span>Moto<span>Care</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a class="active" href="#beranda">Beranda</a>
+        <a href="#riwayat">Riwayat</a>
+        <a href="#pengingat">Pengingat</a>
+        <a href="#kendaraan">Kendaraan</a>
+      </nav>
+      <a class="profile-link" href="#profil"><span class="avatar">MA</span><span>Profil saya</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Perawatan motor, lebih terarah</p>
+          <h1>Motor sehat,<br><em>perjalanan tenang.</em></h1>
+          <p class="hero-text">Catat servis, pantau kondisi, dan jangan lewatkan perawatan berikutnya bersama MotoCare.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#riwayat">Lihat dashboard <span>→</span></a>
+            <a class="text-link" href="#cara-kerja">Cara kerja <span>↗</span></a>
+          </div>
+          <div class="hero-note"><span class="note-icon">✓</span> 3 perawatan terakhir tercatat rapi</div>
+        </div>
+        <div class="hero-visual" id="kendaraan" aria-label="Ilustrasi motor dan status perawatan">
+          <div class="visual-glow"></div>
+          <div class="road-line"></div>
+          <div class="bike-card">
+            <div class="bike-card-top"><span class="status-dot"></span> Kendaraan aktif <strong>●</strong></div>
+            <div class="bike-illustration" aria-hidden="true"><span class="bike-wheel wheel-one"></span><span class="bike-wheel wheel-two"></span><span class="bike-frame"></span><span class="bike-seat"></span><span class="bike-handle"></span><span class="bike-light"></span></div>
+            <div class="bike-label"><div><small>Motor saya</small><strong>Honda Scoopy 2022</strong></div><span class="bike-tag">Baik</span></div>
+          </div>
+          <div class="mileage-card"><span class="mileage-icon">↗</span><div><small>Odometer</small><strong>12.840 <small>km</small></strong></div></div>
+          <div class="service-card"><span class="service-icon">◷</span><div><small>Servis berikutnya</small><strong>24 hari lagi</strong></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-section" id="riwayat">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow"><span></span> Ringkasan kendaraan</p><h2>Semua yang penting,<br><em>dalam satu tampilan.</em></h2></div><a class="button button-outline" href="#riwayat">+ Catat servis</a></div>
+        <div class="stats-grid">
+          <article class="stat-card stat-blue"><span class="stat-icon">▣</span><p>Total servis</p><strong>8 <small>kali</small></strong><span class="stat-foot positive">↗ 2 servis tahun ini</span></article>
+          <article class="stat-card stat-yellow"><span class="stat-icon">◷</span><p>Servis berikutnya</p><strong>24 <small>hari</small></strong><span class="stat-foot">Ganti oli & cek rem</span></article>
+          <article class="stat-card stat-dark"><span class="stat-icon">Rp</span><p>Total pengeluaran</p><strong>Rp 1,85jt</strong><span class="stat-foot">Sejak Januari 2024</span></article>
+          <article class="stat-card stat-green"><span class="stat-icon">♥</span><p>Kondisi motor</p><strong>Baik</strong><span class="stat-foot positive">Semua aman terkendali</span></article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel history-panel" aria-labelledby="history-title">
+            <div class="panel-heading"><div><p class="panel-kicker">Aktivitas terbaru</p><h3 id="history-title">Riwayat perawatan</h3></div><a href="#riwayat">Lihat semua →</a></div>
+            <div class="table-wrap"><table><thead><tr><th>Perawatan</th><th>Tanggal</th><th>Biaya</th><th>Status</th></tr></thead><tbody><tr><td><span class="table-icon oil">◉</span><div><strong>Ganti oli mesin</strong><small>AHASS Cibiru</small></div></td><td>12 Agu 2024</td><td>Rp 85.000</td><td><span class="pill done">Selesai</span></td></tr><tr><td><span class="table-icon brake">＋</span><div><strong>Cek kampas rem</strong><small>Bengkel Maju Motor</small></div></td><td>28 Jun 2024</td><td>Rp 120.000</td><td><span class="pill done">Selesai</span></td></tr><tr><td><span class="table-icon tire">◌</span><div><strong>Ganti ban belakang</strong><small>Planet Ban</small></div></td><td>15 Apr 2024</td><td>Rp 420.000</td><td><span class="pill done">Selesai</span></td></tr></tbody></table></div>
+          </section>
+          <aside class="panel reminder-panel" id="pengingat" aria-labelledby="reminder-title"><div class="reminder-top"><span class="panel-kicker">Jangan sampai lupa</span><span class="bell">♧</span></div><h3 id="reminder-title">Pengingat mendatang</h3><div class="reminder-item"><span class="calendar">18<br><small>SEP</small></span><div><strong>Ganti oli mesin</strong><small>Honda Scoopy · 13.500 km</small></div><span class="arrow">→</span></div><div class="reminder-item"><span class="calendar muted">05<br><small>OKT</small></span><div><strong>Servis rutin</strong><small>Honda Scoopy · 15.000 km</small></div><span class="arrow">→</span></div><a class="reminder-link" href="#riwayat">+ Tambah pengingat</a></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-section" id="cara-kerja"><div class="container how-grid"><div><p class="eyebrow"><span></span> Dibuat untuk pemilik motor</p><h2>Rawat sekarang,<br><em>hemat kemudian.</em></h2></div><div class="steps"><div class="step"><span>01</span><div><strong>Catat</strong><p>Simpan semua riwayat servis dalam satu tempat.</p></div></div><div class="step"><span>02</span><div><strong>Ingat</strong><p>Dapatkan pengingat berdasarkan tanggal dan kilometer.</p></div></div><div class="step"><span>03</span><div><strong>Pantau</strong><p>Kenali kondisi motor dan kendalikan biaya perawatan.</p></div></div></div></div></section>
+  </main>
+
+  <footer class="site-footer" id="profil"><div class="container footer-wrap"><div><a class="brand footer-brand" href="#beranda"><span class="brand-mark">M</span><span>Moto<span>Care</span></span></a><p>Teman perjalanan untuk motor yang selalu siap.</p></div><div class="footer-meta"><span>Kelompok 15</span><span>HTML + CSS Project</span><span>© 2024 MotoCare</span></div></div></footer>
+</body>
+</html>
