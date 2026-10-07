@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="MotoCare membantu pemilik motor mencatat dan mengingat jadwal perawatan kendaraan."
+    />
+    <title>MotoCare | Vehicle Maintenance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"DM Sans"', 'sans-serif'],
+              display: ['"Space Grotesk"', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                blue: '#3778f6',
+                navy: '#14254b',
+                muted: '#71809e',
+                light: '#eef5ff',
+                yellow: '#ffd052',
+                green: '#2cad8a',
+                cream: '#fff8e9',
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased">
+    <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center gap-10 px-6 py-0 lg:px-8">
+        <a href="#beranda" class="flex items-center gap-3 py-4 font-display text-[1.65rem] font-bold tracking-[-0.06em] text-slate-900" aria-label="MotoCare beranda">
+          <span class="grid h-9 w-9 place-items-center rounded-[10px_10px_10px_3px] bg-brand-blue text-lg font-bold text-white shadow-[0_6px_16px_rgba(55,120,246,0.35)]">M</span>
+          <span>Moto<span class="text-brand-blue">Care</span></span>
+        </a>
+
+        <nav class="ml-auto hidden items-center gap-8 text-sm font-semibold text-slate-500 md:flex" aria-label="Navigasi utama">
+          <a class="border-b-4 border-brand-blue pb-6 pt-7 text-brand-blue" href="#beranda">Beranda</a>
+          <a class="pb-6 pt-7 transition-colors hover:text-brand-blue" href="#riwayat">Riwayat</a>
+          <a class="pb-6 pt-7 transition-colors hover:text-brand-blue" href="#pengingat">Pengingat</a>
+          <a class="pb-6 pt-7 transition-colors hover:text-brand-blue" href="#kendaraan">Kendaraan</a>
+        </nav>
+
+        <a href="#profil" class="ml-auto flex items-center gap-2 rounded-full bg-white px-2 py-1 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200 md:ml-0">
+          <span class="grid h-8 w-8 place-items-center rounded-full bg-[#ef8b6d] text-[0.7rem] font-bold text-white">MA</span>
+          <span class="hidden sm:inline">Profil saya</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section id="beranda" class="overflow-hidden bg-gradient-to-r from-[#f8fbff] via-[#f4f8ff] to-[#eef5ff] py-16 lg:py-20">
+        <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+          <div>
+            <p class="mb-5 inline-flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-brand-blue">
+              <span class="h-[3px] w-5 rounded-full bg-brand-yellow"></span>
+              Perawatan motor, lebih terarah
+            </p>
+
+            <h1 class="font-display text-[3.2rem] font-bold leading-[0.92] tracking-[-0.08em] text-slate-900 sm:text-[4.2rem] lg:text-[5.2rem]">
+              Motor sehat,<br />
+              <span class="text-brand-blue">perjalanan tenang.</span>
+            </h1>
+
+            <p class="mt-6 max-w-xl text-lg leading-8 text-slate-500">
+              Catat servis, pantau kondisi, dan jangan lewatkan perawatan berikutnya bersama MotoCare.
+            </p>
+
+            <div class="mt-8 flex flex-wrap items-center gap-6">
+              <a href="#riwayat" class="inline-flex items-center justify-center rounded-xl bg-brand-blue px-5 py-4 text-base font-bold text-white shadow-[0_12px_24px_rgba(55,120,246,0.3)] transition-transform hover:-translate-y-0.5">
+                Lihat dashboard <span class="ml-3 text-xl">→</span>
+              </a>
+              <a href="#cara-kerja" class="inline-flex items-center gap-1 text-base font-bold text-slate-900">
+                Cara kerja <span class="text-brand-blue">↗</span>
+              </a>
+            </div>
+
+            <div class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span class="grid h-5 w-5 place-items-center rounded-full bg-brand-green text-[0.65rem] text-white">✓</span>
+              3 perawatan terakhir tercatat rapi
+            </div>
+          </div>
+
+          <div id="kendaraan" class="relative min-h-[420px]" aria-label="Ilustrasi motor dan status perawatan">
+            <div class="absolute inset-x-12 top-8 h-[300px] rounded-full bg-[#dceafb] blur-[12px]"></div>
+            <div class="absolute bottom-5 left-[-10%] h-20 w-[120%] -rotate-[7deg] border-t-2 border-dashed border-sky-200"></div>
+
+            <div class="relative mx-auto w-full max-w-[440px] rounded-[22px] border border-sky-100 bg-white/85 p-5 shadow-[0_24px_40px_rgba(133,159,194,0.22)] backdrop-blur-sm">
+              <div class="flex items-center gap-2 text-[0.7rem] font-bold text-slate-500">
+                <span class="h-2.5 w-2.5 rounded-full bg-brand-green"></span>
+                Kendaraan aktif <strong class="ml-auto text-sm text-brand-green">●</strong>
+              </div>
+
+              <svg viewBox="0 0 420 200" class="mt-3 h-52 w-full" aria-hidden="true">
+                <g fill="none" stroke="#14254b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="96" cy="150" r="52" stroke="#14254b" fill="rgba(255,255,255,0.2)"/>
+                  <circle cx="300" cy="150" r="52" stroke="#14254b" fill="rgba(255,255,255,0.2)"/>
+                  <path d="M115 127 L170 97 L240 97 L295 127 L225 127 L190 150 L160 150 L130 118 Z" stroke="#3778f6" stroke-width="10" fill="none"/>
+                  <path d="M170 97 L140 65" stroke="#14254b" stroke-width="8"/>
+                  <path d="M220 97 L250 65" stroke="#14254b" stroke-width="8"/>
+                  <path d="M85 118 L145 118" stroke="#3778f6" stroke-width="10"/>
+                  <path d="M240 65 L290 65" stroke="#14254b" stroke-width="8"/>
+                  <path d="M290 65 L330 85" stroke="#14254b" stroke-width="8"/>
+                  <path d="M165 102 L180 74" stroke="#3778f6" stroke-width="8"/>
+                  <path d="M180 96 L205 96" stroke="#3778f6" stroke-width="8"/>
+                  <path d="M290 90 L328 90" stroke="#ffd052" stroke-width="10"/>
+                </g>
+              </svg>
+
+              <div class="mt-2 flex items-center justify-between border-t border-slate-200 pt-4">
+                <div>
+                  <small class="block text-[0.68rem] text-slate-500">Motor saya</small>
+                  <strong class="text-sm font-bold text-slate-900">Honda Scoopy 2022</strong>
+                </div>
+                <span class="rounded-md bg-emerald-100 px-2.5 py-1 text-[0.68rem] font-bold text-emerald-700">Baik</span>
+              </div>
+            </div>
+
+            <div class="absolute left-0 top-12 flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-[0_10px_20px_rgba(133,159,194,0.12)]">
+              <span class="grid h-7 w-7 place-items-center rounded-md bg-brand-light text-sm text-brand-blue">↗</span>
+              <div>
+                <small class="block text-[0.62rem] text-slate-500">Odometer</small>
+                <strong class="text-sm font-semibold text-slate-900">12.840 <span class="text-[0.68rem] font-medium">km</span></strong>
+              </div>
+            </div>
+
+            <div class="absolute bottom-7 right-0 flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-[0_10px_20px_rgba(133,159,194,0.12)]">
+              <span class="grid h-7 w-7 place-items-center rounded-md bg-amber-100 text-sm text-amber-500">◷</span>
+              <div>
+                <small class="block text-[0.62rem] text-slate-500">Servis berikutnya</small>
+                <strong class="text-sm font-semibold text-slate-900">24 hari lagi</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="riwayat" class="bg-white py-20">
+        <div class="mx-auto max-w-6xl px-6 lg:px-8">
+          <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="mb-4 inline-flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-brand-blue">
+                <span class="h-[3px] w-5 rounded-full bg-brand-yellow"></span>
+                Ringkasan kendaraan
+              </p>
+              <h2 class="font-display text-[2.4rem] font-bold leading-[0.96] tracking-[-0.06em] text-slate-900 sm:text-[3rem]">
+                Semua yang penting,<br />
+                <span class="text-brand-blue">dalam satu tampilan.</span>
+              </h2>
+            </div>
+            <a href="#riwayat" class="inline-flex items-center justify-center rounded-xl border border-blue-200 bg-white px-4 py-3 text-sm font-bold text-brand-blue transition-colors hover:bg-brand-light">
+              + Catat servis
+            </a>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <article class="rounded-2xl bg-brand-light p-5">
+              <span class="mb-4 grid h-8 w-8 place-items-center rounded-lg bg-white text-sm font-bold text-brand-blue">▣</span>
+              <p class="mb-2 text-[0.72rem] font-semibold text-slate-500">Total servis</p>
+              <strong class="mb-3 block font-display text-[1.7rem] font-bold tracking-[-0.05em] text-slate-900">8 <span class="text-base font-medium">kali</span></strong>
+              <span class="text-[0.7rem] font-semibold text-brand-green">↗ 2 servis tahun ini</span>
+            </article>
+
+            <article class="rounded-2xl bg-brand-cream p-5">
+              <span class="mb-4 grid h-8 w-8 place-items-center rounded-lg bg-white text-sm font-bold text-amber-500">◷</span>
+              <p class="mb-2 text-[0.72rem] font-semibold text-slate-500">Servis berikutnya</p>
+              <strong class="mb-3 block font-display text-[1.7rem] font-bold tracking-[-0.05em] text-slate-900">24 <span class="text-base font-medium">hari</span></strong>
+              <span class="text-[0.7rem] font-semibold text-slate-500">Ganti oli &amp; cek rem</span>
+            </article>
+
+            <article class="rounded-2xl bg-slate-900 p-5 text-white">
+              <span class="mb-4 grid h-8 w-8 place-items-center rounded-lg bg-slate-700 text-sm font-bold text-brand-yellow">Rp</span>
+              <p class="mb-2 text-[0.72rem] font-semibold text-slate-400">Total pengeluaran</p>
+              <strong class="mb-3 block font-display text-[1.7rem] font-bold tracking-[-0.05em]">Rp 1,85jt</strong>
+              <span class="text-[0.7rem] font-semibold text-slate-400">Sejak Januari 2024</span>
+            </article>
+
+            <article class="rounded-2xl bg-emerald-50 p-5">
+              <span class="mb-4 grid h-8 w-8 place-items-center rounded-lg bg-white text-sm font-bold text-brand-green">♥</span>
+              <p class="mb-2 text-[0.72rem] font-semibold text-slate-500">Kondisi motor</p>
+              <strong class="mb-3 block font-display text-[1.7rem] font-bold tracking-[-0.05em] text-slate-900">Baik</strong>
+              <span class="text-[0.7rem] font-semibold text-brand-green">Semua aman terkendali</span>
+            </article>
+          </div>
+
+          <div class="mt-6 grid gap-5 xl:grid-cols-[1.35fr_0.65fr]">
+            <section class="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="history-title">
+              <div class="mb-6 flex items-start justify-between gap-4">
+                <div>
+                  <p class="mb-2 text-[0.68rem] font-bold uppercase tracking-[0.08em] text-slate-500">Aktivitas terbaru</p>
+                  <h3 id="history-title" class="font-display text-[1.8rem] font-bold tracking-[-0.05em] text-slate-900">Riwayat perawatan</h3>
+                </div>
+                <a href="#riwayat" class="text-[0.72rem] font-bold text-brand-blue">Lihat semua →</a>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="min-w-full text-left text-[0.72rem]">
+                  <thead>
+                    <tr class="border-b border-slate-200 text-slate-500">
+                      <th class="pb-3 pr-3 font-semibold">Perawatan</th>
+                      <th class="pb-3 pr-3 font-semibold">Tanggal</th>
+                      <th class="pb-3 pr-3 font-semibold">Biaya</th>
+                      <th class="pb-3 font-semibold">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-slate-100">
+                      <td class="py-4 pr-3">
+                        <div class="flex items-center gap-3">
+                          <span class="grid h-8 w-8 place-items-center rounded-lg bg-amber-100 text-amber-500">◉</span>
+                          <div>
+                            <strong class="block font-semibold text-slate-900">Ganti oli mesin</strong>
+                            <small class="text-slate-500">AHASS Cibiru</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-4 pr-3 text-slate-500">12 Agu 2024</td>
+                      <td class="py-4 pr-3 text-slate-500">Rp 85.000</td>
+                      <td class="py-4"><span class="inline-block rounded-full bg-emerald-100 px-2 py-1 text-[0.62rem] font-bold text-emerald-700">Selesai</span></td>
+                    </tr>
+                    <tr class="border-b border-slate-100">
+                      <td class="py-4 pr-3">
+                        <div class="flex items-center gap-3">
+                          <span class="grid h-8 w-8 place-items-center rounded-lg bg-red-50 text-red-500">＋</span>
+                          <div>
+                            <strong class="block font-semibold text-slate-900">Cek kampas rem</strong>
+                            <small class="text-slate-500">Bengkel Maju Motor</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-4 pr-3 text-slate-500">28 Jun 2024</td>
+                      <td class="py-4 pr-3 text-slate-500">Rp 120.000</td>
+                      <td class="py-4"><span class="inline-block rounded-full bg-emerald-100 px-2 py-1 text-[0.62rem] font-bold text-emerald-700">Selesai</span></td>
+                    </tr>
+                    <tr>
+                      <td class="py-4 pr-3">
+                        <div class="flex items-center gap-3">
+                          <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand-light text-brand-blue">◌</span>
+                          <div>
+                            <strong class="block font-semibold text-slate-900">Ganti ban belakang</strong>
+                            <small class="text-slate-500">Planet Ban</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-4 pr-3 text-slate-500">15 Apr 2024</td>
+                      <td class="py-4 pr-3 text-slate-500">Rp 420.000</td>
+                      <td class="py-4"><span class="inline-block rounded-full bg-emerald-100 px-2 py-1 text-[0.62rem] font-bold text-emerald-700">Selesai</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <aside id="pengingat" class="rounded-2xl bg-slate-900 p-6 text-white">
+              <div class="mb-3 flex items-center justify-between">
+                <span class="text-[0.66rem] font-bold uppercase tracking-[0.08em] text-slate-400">Jangan sampai lupa</span>
+                <span class="text-lg text-brand-yellow">♧</span>
+              </div>
+
+              <h3 class="mb-5 font-display text-[1.8rem] font-bold tracking-[-0.05em] text-white">Pengingat mendatang</h3>
+
+              <div id="reminderList" class="space-y-3">
+                <div class="flex items-center gap-3 border-t border-slate-700 pt-4">
+                  <span class="grid h-11 w-11 place-items-center rounded-lg bg-brand-yellow text-center font-display text-[0.8rem] font-bold leading-none text-slate-900">
+                    18<br /><small class="text-[0.48rem] font-sans">SEP</small>
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <strong class="block text-sm font-semibold">Ganti oli mesin</strong>
+                    <small class="text-slate-400">Honda Scoopy · 13.500 km</small>
+                  </div>
+                  <span class="text-brand-yellow">→</span>
+                </div>
+
+                <div class="flex items-center gap-3 border-t border-slate-700 pt-4">
+                  <span class="grid h-11 w-11 place-items-center rounded-lg bg-slate-700 text-center font-display text-[0.8rem] font-bold leading-none text-white">
+                    05<br /><small class="text-[0.48rem] font-sans">OKT</small>
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <strong class="block text-sm font-semibold">Servis rutin</strong>
+                    <small class="text-slate-400">Honda Scoopy · 15.000 km</small>
+                  </div>
+                  <span class="text-brand-yellow">→</span>
+                </div>
+              </div>
+
+              <form id="reminderForm" class="mt-4 hidden rounded-xl border border-slate-700 bg-slate-800 p-3 text-sm text-slate-200">
+                <div class="mb-2">
+                  <label for="reminderTitle" class="mb-1 block text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-400">Judul</label>
+                  <input id="reminderTitle" type="text" placeholder="Contoh: Ganti rantai" class="w-full rounded-lg border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-brand-blue focus:outline-none" required />
+                </div>
+                <div class="mb-2 grid gap-2 sm:grid-cols-2">
+                  <div>
+                    <label for="reminderDate" class="mb-1 block text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-400">Tanggal</label>
+                    <input id="reminderDate" type="text" placeholder="18 SEP" class="w-full rounded-lg border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-brand-blue focus:outline-none" required />
+                  </div>
+                  <div>
+                    <label for="reminderKm" class="mb-1 block text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-400">Kilometer</label>
+                    <input id="reminderKm" type="text" placeholder="13.500 km" class="w-full rounded-lg border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-brand-blue focus:outline-none" required />
+                  </div>
+                </div>
+                <div class="flex items-center justify-end gap-2 pt-2">
+                  <button type="button" id="cancelReminder" class="rounded-lg border border-slate-600 px-3 py-2 text-xs font-semibold text-slate-300">Batal</button>
+                  <button type="submit" class="rounded-lg bg-brand-yellow px-3 py-2 text-xs font-bold text-slate-900">Simpan</button>
+                </div>
+              </form>
+
+              <button id="addReminderButton" type="button" class="mt-5 inline-block text-left text-[0.72rem] font-bold text-brand-yellow">+ Tambah pengingat</button>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="referensi-motor" class="bg-white pb-16">
+        <div class="mx-auto max-w-6xl px-6 lg:px-8">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+            <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p class="mb-2 text-[0.68rem] font-bold uppercase tracking-[0.08em] text-brand-blue">Data langsung dari REST API</p>
+                <h2 id="motor-api-title" class="font-display text-2xl font-bold tracking-[-0.05em] text-slate-900">Referensi merek motor</h2>
+                <p class="mt-2 text-sm text-slate-500">Daftar pabrikan kendaraan roda dua dari NHTSA.</p>
+              </div>
+              <a href="https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/motorcycle?format=json" target="_blank" rel="noreferrer" class="text-xs font-semibold text-brand-blue hover:underline">Lihat sumber API ↗</a>
+            </div>
+
+            <div id="motorApiPanel" aria-labelledby="motor-api-title" aria-busy="true">
+              <div class="flex items-center gap-3">
+                <span id="motorApiSpinner" class="api-spinner" aria-hidden="true"></span>
+                <p id="motorApiMessage" class="text-sm text-slate-500" role="status" aria-live="polite">Menghubungkan ke API dan memuat data...</p>
+              </div>
+              <p id="motorApiError" class="mt-3 text-sm text-red-700" role="alert" hidden></p>
+              <ul id="motorApiList" class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Daftar merek motor" hidden></ul>
+              <button id="motorApiRetry" type="button" class="mt-4 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2" hidden>Coba lagi</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cara-kerja" class="bg-brand-light py-20">
+        <div class="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+          <div>
+            <p class="mb-4 inline-flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-brand-blue">
+              <span class="h-[3px] w-5 rounded-full bg-brand-yellow"></span>
+              Dibuat untuk pemilik motor
+            </p>
+            <h2 class="font-display text-[2.4rem] font-bold leading-[0.96] tracking-[-0.06em] text-slate-900 sm:text-[3rem]">
+              Rawat sekarang,<br />
+              <span class="text-brand-blue">hemat kemudian.</span>
+            </h2>
+          </div>
+
+          <div class="space-y-6">
+            <div class="grid gap-4 border-b border-sky-200 pb-5 sm:grid-cols-[60px_1fr]">
+              <span class="font-display text-[1.2rem] font-bold text-brand-blue">01</span>
+              <div>
+                <strong class="font-display text-[1.2rem] text-slate-900">Catat</strong>
+                <p class="mt-2 max-w-[440px] text-sm leading-6 text-slate-500">Simpan semua riwayat servis dalam satu tempat.</p>
+              </div>
+            </div>
+
+            <div class="grid gap-4 border-b border-sky-200 pb-5 sm:grid-cols-[60px_1fr]">
+              <span class="font-display text-[1.2rem] font-bold text-brand-blue">02</span>
+              <div>
+                <strong class="font-display text-[1.2rem] text-slate-900">Ingat</strong>
+                <p class="mt-2 max-w-[440px] text-sm leading-6 text-slate-500">Dapatkan pengingat berdasarkan tanggal dan kilometer.</p>
+              </div>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-[60px_1fr]">
+              <span class="font-display text-[1.2rem] font-bold text-brand-blue">03</span>
+              <div>
+                <strong class="font-display text-[1.2rem] text-slate-900">Pantau</strong>
+                <p class="mt-2 max-w-[440px] text-sm leading-6 text-slate-500">Kenali kondisi motor dan kendalikan biaya perawatan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="profil" class="bg-slate-900 py-9 text-white">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+        <div>
+          <a href="#beranda" class="flex items-center gap-3 font-display text-[1.35rem] font-bold tracking-[-0.06em] text-white">
+            <span class="grid h-8 w-8 place-items-center rounded-[10px_10px_10px_3px] bg-brand-yellow text-base font-bold text-slate-900">M</span>
+            <span>Moto<span class="text-brand-blue">Care</span></span>
+          </a>
+          <p class="mt-3 text-sm text-slate-400">Teman perjalanan untuk motor yang selalu siap.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 text-[0.68rem] text-slate-400 sm:gap-8">
+          <span>Kelompok 15</span>
+          <span>HTML + CSS Project</span>
+          <span>© 2024 MotoCare</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const reminderList = document.getElementById('reminderList');
+      const reminderForm = document.getElementById('reminderForm');
+      const addReminderButton = document.getElementById('addReminderButton');
+      const cancelReminderButton = document.getElementById('cancelReminder');
+      const reminderTitleInput = document.getElementById('reminderTitle');
+      const reminderDateInput = document.getElementById('reminderDate');
+      const reminderKmInput = document.getElementById('reminderKm');
+      const motorApiPanel = document.getElementById('motorApiPanel');
+      const motorApiSpinner = document.getElementById('motorApiSpinner');
+      const motorApiMessage = document.getElementById('motorApiMessage');
+      const motorApiError = document.getElementById('motorApiError');
+      const motorApiList = document.getElementById('motorApiList');
+      const motorApiRetry = document.getElementById('motorApiRetry');
+      const motorApiUrl = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/motorcycle?format=json';
+
+      const loadMotorMakes = async () => {
+        motorApiPanel.setAttribute('aria-busy', 'true');
+        motorApiSpinner.hidden = false;
+        motorApiMessage.textContent = 'Menghubungkan ke API dan memuat data...';
+        motorApiMessage.hidden = false;
+        motorApiError.hidden = true;
+        motorApiList.hidden = true;
+        motorApiList.replaceChildren();
+        motorApiRetry.hidden = true;
+
+        try {
+          const response = await fetch(motorApiUrl);
+          if (!response.ok) {
+            throw new Error(`Server merespons dengan status ${response.status}.`);
+          }
+
+          const data = await response.json();
+          if (!Array.isArray(data.Results)) {
+            throw new Error('Format data dari API tidak sesuai.');
+          }
+
+          const makes = [...new Set(data.Results
+            .map((item) => item.MakeName)
+            .filter((name) => typeof name === 'string' && name.trim())
+            .map((name) => name.trim()))];
+
+          if (makes.length === 0) {
+            throw new Error('API belum menyediakan data merek motor.');
+          }
+
+          const displayedMakes = makes.slice(0, 8);
+          displayedMakes.forEach((make) => {
+            const item = document.createElement('li');
+            item.className = 'rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700';
+            item.textContent = make;
+            motorApiList.append(item);
+          });
+
+          motorApiMessage.textContent = `Data berhasil dimuat. Menampilkan ${displayedMakes.length} dari ${makes.length} merek motor.`;
+          motorApiList.hidden = false;
+          motorApiSpinner.hidden = true;
+        } catch (error) {
+          motorApiSpinner.hidden = true;
+          motorApiMessage.hidden = true;
+          motorApiError.textContent = `Gagal memuat data API: ${error.message}`;
+          motorApiError.hidden = false;
+          motorApiRetry.hidden = false;
+        } finally {
+          motorApiPanel.setAttribute('aria-busy', 'false');
+        }
+      };
+
+      motorApiRetry.addEventListener('click', loadMotorMakes);
+      loadMotorMakes();
+
+      addReminderButton.addEventListener('click', () => {
+        reminderForm.classList.toggle('hidden');
+        reminderTitleInput.focus();
+      });
+
+      cancelReminderButton.addEventListener('click', () => {
+        reminderForm.reset();
+        reminderForm.classList.add('hidden');
+      });
+
+      reminderForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const title = reminderTitleInput.value.trim();
+        const date = reminderDateInput.value.trim();
+        const km = reminderKmInput.value.trim();
+
+        if (!title || !date || !km) {
+          return;
+        }
+
+        const dateParts = date.split(' ');
+        const day = dateParts[0] || '01';
+        const month = dateParts[1] || 'NOV';
+
+        const reminderItem = document.createElement('div');
+        reminderItem.className = 'flex items-center gap-3 border-t border-slate-700 pt-4';
+
+        reminderItem.innerHTML = `
+          <span class="grid h-11 w-11 place-items-center rounded-lg bg-slate-700 text-center font-display text-[0.8rem] font-bold leading-none text-white">
+            ${day}<br /><small class="text-[0.48rem] font-sans">${month}</small>
+          </span>
+          <div class="min-w-0 flex-1">
+            <strong class="block text-sm font-semibold">${title}</strong>
+            <small class="text-slate-400">Honda Scoopy · ${km}</small>
+          </div>
+          <span class="text-brand-yellow">→</span>
+        `;
+
+        reminderList.prepend(reminderItem);
+        reminderForm.reset();
+        reminderForm.classList.add('hidden');
+      });
+
+      document.querySelectorAll('nav a').forEach((link) => {
+        link.addEventListener('click', () => {
+          document.querySelectorAll('nav a').forEach((item) => {
+            item.classList.remove('text-brand-blue', 'border-brand-blue');
+            item.classList.add('text-slate-500');
+          });
+
+          link.classList.add('text-brand-blue', 'border-brand-blue');
+          link.classList.remove('text-slate-500');
+        });
+      });
+    </script>
+  </body>
+</html>
