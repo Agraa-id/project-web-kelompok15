@@ -1,14 +1,14 @@
-# MotoCare — Week 5 PHP Prosedural
+# MotoCare — Week 6 PHP OOP
 
-Dashboard MotoCare mencakup dashboard kondisi kendaraan dan Program Prioritas yang dibuat menggunakan PHP prosedural dan server-side rendering.
+Dashboard MotoCare mencakup dashboard kondisi kendaraan dan Program Prioritas. Halaman Program Prioritas (`index.php`) menggunakan PHP berorientasi objek dan server-side rendering.
 
 ## Implementasi Program Prioritas
 
-- Variabel PHP untuk judul halaman, workspace, pemilik, dan periode.
-- Array multidimensi untuk data program prioritas.
-- Ringkasan jumlah program dihitung dari data PHP.
-- Loop PHP menghasilkan kartu dinamis dan nomor urut.
-- Status dan prioritas menentukan kelas badge secara kondisional.
+- Class `MotoCareProgram` merepresentasikan data satu program perawatan.
+- Setiap object menyimpan properties kode, judul, deskripsi, kategori, prioritas, status, progres, target, dan tim.
+- Method getter menyediakan data program untuk ringkasan dan halaman.
+- Method object menentukan kelas badge status dan prioritas.
+- Loop PHP menghasilkan kartu dinamis dan nomor urut dari daftar object.
 - HTML di-escape sebelum dirender.
 - Tampilan responsif menggunakan CSS terpisah.
 
@@ -36,6 +36,7 @@ Pastikan PHP dan Node.js sudah terpasang.
 4. Buka halaman berikut di browser:
    - `http://localhost:8000/index.html`
    - `http://localhost:8000/program-prioritas.php`
+   - `http://localhost:8000/index.php`
 
 PHP harus dijalankan melalui server, bukan dengan membuka file menggunakan `file://`. Google Fonts dan data REST API NHTSA memerlukan koneksi internet.
 

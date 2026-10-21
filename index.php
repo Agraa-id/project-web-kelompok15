@@ -1,54 +1,135 @@
-<?php
+﻿<?php
 $pageTitle = 'Program Prioritas';
 $workspaceName = 'MotoCare';
 $ownerName = 'Kelompok 15';
 $periodLabel = 'Oktober 2026';
 
+class MotoCareProgram
+{
+    public function __construct(
+        private string $code,
+        private string $title,
+        private string $description,
+        private string $category,
+        private string $priority,
+        private string $status,
+        private int $progress,
+        private string $deadline,
+        private string $team
+    ) {
+    }
+
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getCategory(): string
+    {
+        return $this->category;
+    }
+
+    public function getPriority(): string
+    {
+        return $this->priority;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function getProgress(): int
+    {
+        return max(0, min(100, $this->progress));
+    }
+
+    public function getDeadline(): string
+    {
+        return $this->deadline;
+    }
+
+    public function getTeam(): string
+    {
+        return $this->team;
+    }
+
+    public function getStatusClass(): string
+    {
+        return match ($this->status) {
+            'Berjalan' => 'status-running',
+            'Perencanaan' => 'status-planned',
+            'Selesai' => 'status-complete',
+            default => 'status-default',
+        };
+    }
+
+    public function getPriorityClass(): string
+    {
+        return match ($this->priority) {
+            'Tinggi' => 'priority-high',
+            'Sedang' => 'priority-medium',
+            'Rendah' => 'priority-low',
+            default => 'priority-default',
+        };
+    }
+}
+
 $programs = [
-    [
-        'code' => 'MTR-01',
-        'title' => 'Pencatatan riwayat servis',
-        'description' => 'Mencatat tanggal, jenis perawatan, bengkel, dan biaya servis motor.',
-        'category' => 'Riwayat perawatan',
-        'priority' => 'Tinggi',
-        'status' => 'Berjalan',
-        'progress' => 75,
-        'deadline' => '20 Okt 2026',
-        'team' => 'Tim MotoCare',
-    ],
-    [
-        'code' => 'MTR-02',
-        'title' => 'Pengingat servis berkala',
-        'description' => 'Mengingatkan pemilik motor berdasarkan jadwal servis dan estimasi kilometer.',
-        'category' => 'Jadwal servis',
-        'priority' => 'Tinggi',
-        'status' => 'Berjalan',
-        'progress' => 58,
-        'deadline' => '24 Okt 2026',
-        'team' => 'Tim MotoCare',
-    ],
-    [
-        'code' => 'MTR-03',
-        'title' => 'Ringkasan kondisi motor',
-        'description' => 'Menampilkan kondisi motor, odometer, serta informasi perawatan dalam dashboard.',
-        'category' => 'Dashboard',
-        'priority' => 'Sedang',
-        'status' => 'Perencanaan',
-        'progress' => 20,
-        'deadline' => '30 Okt 2026',
-        'team' => 'Tim MotoCare',
-    ],
-    [
-        'code' => 'MTR-04',
-        'title' => 'Referensi merek motor',
-        'description' => 'Mengambil daftar merek motor dari layanan API sebagai referensi kendaraan.',
-        'category' => 'Integrasi',
-        'priority' => 'Rendah',
-        'status' => 'Selesai',
-        'progress' => 100,
-        'deadline' => '10 Okt 2026',
-        'team' => 'Tim MotoCare',
-    ],
+    new MotoCareProgram(
+        'MTR-01',
+        'Pencatatan riwayat servis',
+        'Mencatat tanggal, jenis perawatan, bengkel, dan biaya servis motor.',
+        'Riwayat perawatan',
+        'Tinggi',
+        'Berjalan',
+        75,
+        '20 Okt 2026',
+        'Tim MotoCare'
+    ),
+    new MotoCareProgram(
+        'MTR-02',
+        'Pengingat servis berkala',
+        'Mengingatkan pemilik motor berdasarkan jadwal servis dan estimasi kilometer.',
+        'Jadwal servis',
+        'Tinggi',
+        'Berjalan',
+        58,
+        '24 Okt 2026',
+        'Tim MotoCare'
+    ),
+    new MotoCareProgram(
+        'MTR-03',
+        'Ringkasan kondisi motor',
+        'Menampilkan kondisi motor, odometer, serta informasi perawatan dalam dashboard.',
+        'Dashboard',
+        'Sedang',
+        'Perencanaan',
+        20,
+        '30 Okt 2026',
+        'Tim MotoCare'
+    ),
+    new MotoCareProgram(
+        'MTR-04',
+        'Referensi merek motor',
+        'Mengambil daftar merek motor dari layanan API sebagai referensi kendaraan.',
+        'Integrasi',
+        'Rendah',
+        'Selesai',
+        100,
+        '10 Okt 2026',
+        'Tim MotoCare'
+    ),
 ];
 
 function escapeHtml(string $value): string
@@ -56,29 +137,9 @@ function escapeHtml(string $value): string
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
-function statusClass(string $status): string
-{
-    return match ($status) {
-        'Berjalan' => 'status-running',
-        'Perencanaan' => 'status-planned',
-        'Selesai' => 'status-complete',
-        default => 'status-default',
-    };
-}
-
-function priorityClass(string $priority): string
-{
-    return match ($priority) {
-        'Tinggi' => 'priority-high',
-        'Sedang' => 'priority-medium',
-        'Rendah' => 'priority-low',
-        default => 'priority-default',
-    };
-}
-
 $programCount = count($programs);
-$runningCount = count(array_filter($programs, fn (array $program): bool => $program['status'] === 'Berjalan'));
-$completedCount = count(array_filter($programs, fn (array $program): bool => $program['status'] === 'Selesai'));
+$runningCount = count(array_filter($programs, fn (MotoCareProgram $program): bool => $program->getStatus() === 'Berjalan'));
+$completedCount = count(array_filter($programs, fn (MotoCareProgram $program): bool => $program->getStatus() === 'Selesai'));
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -113,7 +174,7 @@ $completedCount = count(array_filter($programs, fn (array $program): bool => $pr
             <span><strong><?= escapeHtml($ownerName) ?></strong><small>Workspace aktif</small></span>
             <span class="workspace-menu" aria-hidden="true">···</span>
           </div>
-          <p class="sidebar-footnote">Week 5 <span>·</span> PHP Prosedural</p>
+          <p class="sidebar-footnote">Week 6 <span>·</span> PHP OOP</p>
         </div>
       </aside>
 
@@ -166,42 +227,39 @@ $completedCount = count(array_filter($programs, fn (array $program): bool => $pr
 
           <div class="program-grid">
             <?php foreach ($programs as $index => $program): ?>
-              <?php
-                $number = str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT);
-                $progress = max(0, min(100, (int) $program['progress']));
-              ?>
+              <?php $progress = $program->getProgress(); ?>
               <article class="program-card">
                 <div class="card-topline">
-                  <span class="program-number"><?= escapeHtml($number) ?></span>
-                  <span class="program-code"><?= escapeHtml($program['code']) ?></span>
-                  <span class="priority-badge <?= escapeHtml(priorityClass($program['priority'])) ?>">
-                    <span aria-hidden="true">●</span>Prioritas <?= escapeHtml($program['priority']) ?>
+                  <span class="program-number"><?= escapeHtml(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)) ?></span>
+                  <span class="program-code"><?= escapeHtml($program->getCode()) ?></span>
+                  <span class="priority-badge <?= escapeHtml($program->getPriorityClass()) ?>">
+                    <span aria-hidden="true">●</span>Prioritas <?= escapeHtml($program->getPriority()) ?>
                   </span>
                 </div>
 
                 <div class="program-title-row">
-                  <div class="program-symbol" aria-hidden="true"><?= escapeHtml(substr($program['title'], 0, 1)) ?></div>
+                  <div class="program-symbol" aria-hidden="true"><?= escapeHtml(substr($program->getTitle(), 0, 1)) ?></div>
                   <div>
-                    <p class="program-category"><?= escapeHtml($program['category']) ?></p>
-                    <h3><?= escapeHtml($program['title']) ?></h3>
+                    <p class="program-category"><?= escapeHtml($program->getCategory()) ?></p>
+                    <h3><?= escapeHtml($program->getTitle()) ?></h3>
                   </div>
                 </div>
-                <p class="program-description"><?= escapeHtml($program['description']) ?></p>
+                <p class="program-description"><?= escapeHtml($program->getDescription()) ?></p>
 
                 <div class="progress-heading">
                   <span>Progres</span>
                   <strong><?= $progress ?>%</strong>
                 </div>
-                <div class="progress-track" role="progressbar" aria-label="Progres <?= escapeHtml($program['title']) ?>" aria-valuemin="0" aria-valuemax="100" aria-valuenow="<?= $progress ?>">
+                <div class="progress-track" role="progressbar" aria-label="Progres <?= escapeHtml($program->getTitle()) ?>" aria-valuemin="0" aria-valuemax="100" aria-valuenow="<?= $progress ?>">
                   <span style="width: <?= $progress ?>%"></span>
                 </div>
 
                 <div class="card-footer">
-                  <span class="status-badge <?= escapeHtml(statusClass($program['status'])) ?>">
-                    <span aria-hidden="true"></span><?= escapeHtml($program['status']) ?>
+                  <span class="status-badge <?= escapeHtml($program->getStatusClass()) ?>">
+                    <span aria-hidden="true"></span><?= escapeHtml($program->getStatus()) ?>
                   </span>
-                  <div class="card-meta"><span>Target</span><strong><?= escapeHtml($program['deadline']) ?></strong></div>
-                  <div class="team-avatar" title="<?= escapeHtml($program['team']) ?>"><?= escapeHtml(substr($program['team'], 0, 1)) ?></div>
+                  <div class="card-meta"><span>Target</span><strong><?= escapeHtml($program->getDeadline()) ?></strong></div>
+                  <div class="team-avatar" title="<?= escapeHtml($program->getTeam()) ?>"><?= escapeHtml(substr($program->getTeam(), 0, 1)) ?></div>
                 </div>
               </article>
             <?php endforeach; ?>
