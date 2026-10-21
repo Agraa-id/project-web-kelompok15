@@ -1,0 +1,18 @@
+@import "./site.css";
+@import "tailwindcss";
+
+@source "./index.html";
+@source "./program-prioritas.php";
+
+@theme {
+  --color-ink: #14254b;
+  --color-muted: #71809e;
+  --color-blue: #3778f6;
+  --color-blue-soft: #eef5ff;
+  --color-yellow: #ffd052;
+  --color-line: #dce5f1;
+  --color-green: #2cad8a;
+  --color-cream: #fff8e9;
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
