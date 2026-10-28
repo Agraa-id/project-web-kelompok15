@@ -1,16 +1,17 @@
-# MotoCare — Week 6 PHP OOP
+# MotoCare — Week 7 PHP MVC
 
-Dashboard MotoCare mencakup dashboard kondisi kendaraan dan Program Prioritas. Halaman Program Prioritas (`index.php`) menggunakan PHP berorientasi objek dan server-side rendering.
+Dashboard MotoCare mencakup dashboard kondisi kendaraan dan Program Prioritas. Halaman Program Prioritas menggunakan PHP berorientasi objek, server-side rendering, dan pola Model-View-Controller (MVC).
 
-## Implementasi Program Prioritas
+## Struktur MVC Program Prioritas
 
-- Class `MotoCareProgram` merepresentasikan data satu program perawatan.
-- Setiap object menyimpan properties kode, judul, deskripsi, kategori, prioritas, status, progres, target, dan tim.
-- Method getter menyediakan data program untuk ringkasan dan halaman.
-- Method object menentukan kelas badge status dan prioritas.
-- Loop PHP menghasilkan kartu dinamis dan nomor urut dari daftar object.
-- HTML di-escape sebelum dirender.
-- Tampilan responsif menggunakan CSS terpisah.
+- `Model/MotoCareProgram.php` mendefinisikan object satu program perawatan beserta getter dan class badge.
+- `Model/ProgramModel.php` menyediakan daftar program MotoCare.
+- `Controller/ProgramController.php` menerima request halaman, mengambil data dari Model, menghitung ringkasan, lalu memuat View.
+- `View/program-prioritas.php` merender ringkasan dan kartu program dari data Controller.
+- `index.php` menjadi entry point yang meneruskan request ke Controller.
+- Data teks di View di-escape sebelum dirender; tampilan responsif memakai CSS terpisah.
+
+Alur request: browser → `index.php` → `ProgramController` → `ProgramModel` → View.
 
 ## Fitur Tampilan
 
@@ -36,7 +37,7 @@ Pastikan PHP dan Node.js sudah terpasang.
 4. Buka halaman berikut di browser:
    - `http://localhost:8000/index.html`
    - `http://localhost:8000/program-prioritas.php`
-   - `http://localhost:8000/index.php`
+   - `http://localhost:8000/index.php` (dashboard Program Prioritas berbasis MVC)
 
 PHP harus dijalankan melalui server, bukan dengan membuka file menggunakan `file://`. Google Fonts dan data REST API NHTSA memerlukan koneksi internet.
 
