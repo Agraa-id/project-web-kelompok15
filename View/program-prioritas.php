@@ -74,6 +74,11 @@ function escapeHtml(string $value): string
             <small>Program dalam pengerjaan</small>
           </article>
           <article class="summary-card">
+            <div class="summary-top"><span>Perencanaan</span><span class="summary-icon blue-icon">◷</span></div>
+            <strong><?= $plannedCount ?></strong>
+            <small>Program yang direncanakan</small>
+          </article>
+          <article class="summary-card">
             <div class="summary-top"><span>Selesai</span><span class="summary-icon green-icon">✓</span></div>
             <strong><?= $completedCount ?></strong>
             <small>Program telah diselesaikan</small>

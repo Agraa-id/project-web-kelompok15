@@ -19,6 +19,10 @@ final class ProgramController
             $programs,
             static fn (MotoCareProgram $program): bool => $program->getStatus() === 'Berjalan'
         ));
+        $plannedCount = count(array_filter(
+            $programs,
+            static fn (MotoCareProgram $program): bool => $program->getStatus() === 'Perencanaan'
+        ));
         $completedCount = count(array_filter(
             $programs,
             static fn (MotoCareProgram $program): bool => $program->getStatus() === 'Selesai'
