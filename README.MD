@@ -8,10 +8,11 @@ Dashboard MotoCare mencakup dashboard kondisi kendaraan dan Program Prioritas. H
 - `Model/ProgramModel.php` menyediakan daftar program MotoCare.
 - `Controller/ProgramController.php` menerima request halaman, mengambil data dari Model, menghitung ringkasan, lalu memuat View.
 - `View/program-prioritas.php` merender ringkasan dan kartu program dari data Controller.
-- `index.php` menjadi entry point yang meneruskan request ke Controller.
+- `index.php` menjadi halaman utama MotoCare.
+- `program-prioritas-mvc.php` meneruskan request Program Prioritas ke Controller.
 - Data teks di View di-escape sebelum dirender; tampilan responsif memakai CSS terpisah.
 
-Alur request: browser → `index.php` → `ProgramController` → `ProgramModel` → View.
+Alur request Program Prioritas MVC: browser → `program-prioritas-mvc.php` → `ProgramController` → `ProgramModel` → View.
 
 ## Fitur Tampilan
 
@@ -19,6 +20,7 @@ Alur request: browser → `index.php` → `ProgramController` → `ProgramModel`
 - Riwayat perawatan dan biaya servis.
 - Pengingat servis berdasarkan tanggal dan estimasi kilometer.
 - Daftar merek motor dari REST API NHTSA dengan status loading, error, dan coba lagi.
+- Daftar perawatan interaktif memakai REST API PHP (`GET`, `POST`, dan `PATCH`) dengan loading, refresh, validasi, serta penanganan error.
 - Tampilan responsif untuk desktop dan mobile.
 - Struktur HTML semantik dengan utility Tailwind CSS.
 
@@ -35,10 +37,12 @@ Pastikan PHP dan Node.js sudah terpasang.
    ```
 
 4. Buka halaman berikut di browser:
-   - `http://localhost:8000/index.html`
+   - `http://localhost:8000/index.php`
    - `http://localhost:8000/program-prioritas.php`
-   - `http://localhost:8000/index.php` (dashboard Program Prioritas berbasis MVC)
+   - `http://localhost:8000/program-prioritas-mvc.php` (Program Prioritas berbasis MVC)
 
 PHP harus dijalankan melalui server, bukan dengan membuka file menggunakan `file://`. Google Fonts dan data REST API NHTSA memerlukan koneksi internet.
+
+Daftar perawatan pada `program-prioritas.php` memakai endpoint `api/program-perawatan.php`. Data disimpan per sesi PHP; perubahan tetap tersedia selama sesi browser aktif dan akan diinisialisasi ulang ketika sesi berakhir.
 
 Untuk membangun ulang CSS secara otomatis ketika file terkait diubah, jalankan `npm run watch:css` di terminal terpisah.

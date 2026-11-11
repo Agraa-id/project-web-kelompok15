@@ -1,7 +1,7 @@
 @import "./site.css";
 @import "tailwindcss";
 
-@source "./index.html";
+@source "./index.php";
 @source "./program-prioritas.php";
 
 @theme {
