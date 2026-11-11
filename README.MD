@@ -70,3 +70,28 @@ PHP harus dijalankan melalui server, bukan dengan membuka file menggunakan `file
 Daftar perawatan pada `program-prioritas.php` memakai endpoint `api/program-perawatan.php`. Data disimpan per sesi PHP; perubahan tetap tersedia selama sesi browser aktif dan akan diinisialisasi ulang ketika sesi berakhir.
 
 Untuk membangun ulang CSS secara otomatis ketika file terkait diubah, jalankan `npm run watch:css` di terminal terpisah.
+
+## Aplikasi Laravel (CRUD + Eloquent ORM)
+
+Aplikasi Laravel untuk tugas CRUD tersedia terpisah di folder `laravel-app`; aplikasi PHP MVC yang ada di root tetap dapat digunakan. Aplikasi Laravel menyediakan migration tabel `programs`, model Eloquent `Program`, `ProgramController`, Blade view, dan route resource untuk menambah, menampilkan, mengubah, serta menghapus program.
+
+Jalankan perintah berikut dari folder aplikasi Laravel:
+
+```powershell
+cd laravel-app
+composer install
+Copy-Item .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+Laravel menggunakan database MySQL `motocare_laravel`, terpisah dari database `motocare` milik aplikasi PHP yang sudah ada. Pastikan server MySQL aktif, database tersebut sudah dibuat, dan sesuaikan `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, serta `DB_PASSWORD` di `.env` dengan akun lokalmu. Migration Laravel hanya dijalankan pada database terpisah ini.
+
+Buat database kosong untuk Laravel sebelum migration, misalnya dari MySQL/phpMyAdmin:
+
+```sql
+CREATE DATABASE motocare_laravel CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Buka `http://127.0.0.1:8000` untuk halaman program. Untuk memverifikasi CRUD, jalankan `php artisan test` dari folder `laravel-app`.

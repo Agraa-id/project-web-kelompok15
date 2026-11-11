@@ -1,0 +1,300 @@
+:root {
+    color-scheme: light;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #172a3a;
+    background: #f4f7f8;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 72px;
+    padding: 0 max(24px, calc((100% - 1080px) / 2));
+    background: #fff;
+    border-bottom: 1px solid #e5ebee;
+}
+
+.brand {
+    color: #172a3a;
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.brand span {
+    color: #27866e;
+}
+
+.header-label,
+.program-copy small {
+    color: #71818b;
+    font-size: 0.875rem;
+}
+
+.page {
+    width: min(100% - 40px, 920px);
+    margin: 52px auto 80px;
+}
+
+.page-heading {
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: #27866e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 8px;
+    font-size: clamp(2rem, 5vw, 2.7rem);
+    letter-spacing: -0.045em;
+}
+
+.page-heading > p:last-child,
+.program-copy p,
+.empty-state p {
+    color: #647580;
+    line-height: 1.6;
+}
+
+.panel,
+.program-card,
+.empty-state,
+.notice {
+    border: 1px solid #e2e9eb;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgb(23 42 58 / 4%);
+}
+
+.panel {
+    padding: 24px;
+}
+
+.panel-heading,
+.section-heading,
+.program-card,
+.card-actions,
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.panel-heading h2,
+.section-heading h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.panel-heading .eyebrow,
+.section-heading .eyebrow {
+    margin-bottom: 6px;
+}
+
+.program-form {
+    display: grid;
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.program-form label {
+    display: grid;
+    gap: 8px;
+    color: #334955;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.program-form input,
+.program-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d5dfe3;
+    border-radius: 8px;
+    color: #172a3a;
+    font: inherit;
+}
+
+.program-form textarea {
+    resize: vertical;
+}
+
+.program-form input:focus,
+.program-form textarea:focus {
+    border-color: #27866e;
+    outline: 3px solid rgb(39 134 110 / 14%);
+}
+
+.button {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.button-primary {
+    justify-self: start;
+    color: #fff;
+    background: #27866e;
+}
+
+.button-secondary {
+    color: #334955;
+    background: #fff;
+    border-color: #d5dfe3;
+}
+
+.button-danger {
+    color: #a63e3e;
+    background: #fff5f4;
+    border-color: #f0d7d4;
+}
+
+.program-section {
+    margin-top: 38px;
+}
+
+.section-heading {
+    margin-bottom: 16px;
+}
+
+.count {
+    color: #647580;
+    font-size: 0.9rem;
+}
+
+.program-card {
+    align-items: flex-start;
+    margin-top: 12px;
+    padding: 20px;
+}
+
+.program-copy {
+    min-width: 0;
+}
+
+.program-copy h3,
+.empty-state h3 {
+    margin-bottom: 7px;
+    font-size: 1.08rem;
+}
+
+.program-copy p {
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.program-copy small {
+    display: block;
+}
+
+.card-actions {
+    flex-shrink: 0;
+}
+
+.card-actions form {
+    margin: 0;
+}
+
+.empty-state {
+    padding: 28px;
+    text-align: center;
+}
+
+.empty-state h3 {
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    margin-bottom: 0;
+}
+
+.notice {
+    margin-bottom: 18px;
+    padding: 14px 18px;
+}
+
+.notice p {
+    margin-bottom: 0;
+}
+
+.notice ul {
+    margin-bottom: 0;
+}
+
+.success {
+    color: #20694f;
+    background: #effaf4;
+    border-color: #ccebd9;
+}
+
+.error {
+    color: #963c3c;
+    background: #fff4f3;
+    border-color: #f0d7d4;
+}
+
+.form-actions {
+    justify-content: flex-start;
+}
+
+@media (max-width: 620px) {
+    .site-header {
+        min-height: 62px;
+        padding: 0 20px;
+    }
+
+    .page {
+        width: min(100% - 28px, 920px);
+        margin-top: 34px;
+    }
+
+    .header-label {
+        font-size: 0.78rem;
+    }
+
+    .panel {
+        padding: 18px;
+    }
+
+    .program-card {
+        flex-direction: column;
+    }
+
+    .card-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
