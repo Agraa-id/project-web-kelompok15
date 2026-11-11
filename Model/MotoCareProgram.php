@@ -2,26 +2,22 @@
 final class MotoCareProgram
 {
     public function __construct(
-        private string $code,
-        private string $title,
-        private string $description,
-        private string $category,
-        private string $priority,
-        private string $status,
-        private int $progress,
-        private string $deadline,
-        private string $team
+        private readonly int $id,
+        private readonly string $name,
+        private readonly string $description,
+        private readonly string $createdAt,
+        private readonly string $updatedAt,
     ) {
     }
 
-    public function getCode(): string
+    public function getId(): int
     {
-        return $this->code;
+        return $this->id;
     }
 
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
     public function getDescription(): string
@@ -29,53 +25,13 @@ final class MotoCareProgram
         return $this->description;
     }
 
-    public function getCategory(): string
+    public function getCreatedAt(): string
     {
-        return $this->category;
+        return $this->createdAt;
     }
 
-    public function getPriority(): string
+    public function getUpdatedAt(): string
     {
-        return $this->priority;
-    }
-
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function getProgress(): int
-    {
-        return max(0, min(100, $this->progress));
-    }
-
-    public function getDeadline(): string
-    {
-        return $this->deadline;
-    }
-
-    public function getTeam(): string
-    {
-        return $this->team;
-    }
-
-    public function getStatusClass(): string
-    {
-        return match ($this->status) {
-            'Berjalan' => 'status-running',
-            'Perencanaan' => 'status-planned',
-            'Selesai' => 'status-complete',
-            default => 'status-default',
-        };
-    }
-
-    public function getPriorityClass(): string
-    {
-        return match ($this->priority) {
-            'Tinggi' => 'priority-high',
-            'Sedang' => 'priority-medium',
-            'Rendah' => 'priority-low',
-            default => 'priority-default',
-        };
+        return $this->updatedAt;
     }
 }

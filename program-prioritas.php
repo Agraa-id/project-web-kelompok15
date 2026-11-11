@@ -166,7 +166,7 @@ $escapeHtml = static fn (string $value): string => htmlspecialchars($value, ENT_
             <span class="block text-[.72rem] font-semibold text-muted">Kendaraan aktif</span>
             <strong class="mt-1 block font-display text-[1.25rem] leading-tight"><?= $escapeHtml($profile['brand'] . ' ' . $profile['model']) ?></strong>
             <span class="mt-2 block text-[.68rem] text-muted">Tahun <?= $profile['year'] ?> · <?= number_format($profile['mileage'], 0, ',', '.') ?> km</span>
-            <span class="mt-3 inline-block rounded-full bg-[#e4f7f1] px-3 py-1 text-[.68rem] font-bold text-[#16866c]"><?= $escapeHtml($profile['condition']) ?> · <span id="program-count"><?= count($programs) ?></span> program perawatan</span>
+            <span class="mt-3 inline-block rounded-full bg-[#e4f7f1] px-3 py-1 text-[.68rem] font-bold text-[#16866c]"><?= $escapeHtml($profile['condition']) ?> · <?= count($programs) ?> program perawatan</span>
           </div>
         </div>
 
@@ -325,7 +325,6 @@ $escapeHtml = static fn (string $value): string => htmlspecialchars($value, ENT_
         document.getElementById('urgent-count').textContent = String(counts.segera);
         document.getElementById('scheduled-count').textContent = String(counts.terjadwal);
         document.getElementById('routine-count').textContent = String(counts.rutin);
-        document.getElementById('program-count').textContent = String(tasks.length);
       }
 
       async function loadTasks() {

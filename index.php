@@ -24,7 +24,7 @@ $pageDescription = 'MotoCare membantu pemilik motor mencatat dan mengingat jadwa
       <nav class="main-nav" aria-label="Navigasi utama">
         <a class="active" href="#beranda">Beranda</a>
         <a href="#riwayat">Riwayat</a>
-        <a href="program-prioritas.php">Program</a>
+        <a href="program-prioritas-mvc.php">Program</a>
         <a href="#pengingat">Pengingat</a>
         <a href="#kendaraan">Kendaraan</a>
       </nav>

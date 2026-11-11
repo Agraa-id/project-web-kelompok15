@@ -1,58 +1,70 @@
 <?php
+declare(strict_types=1);
+
 require_once __DIR__ . '/MotoCareProgram.php';
 
 final class ProgramModel
 {
+    public function __construct(private readonly PDO $pdo)
+    {
+    }
+
     /**
-     * @return MotoCareProgram[]
+     * @return list<MotoCareProgram>
      */
     public function getAll(): array
     {
-        return [
-            new MotoCareProgram(
-                'MTR-01',
-                'Pencatatan riwayat servis',
-                'Mencatat tanggal, jenis perawatan, bengkel, dan biaya servis motor.',
-                'Riwayat perawatan',
-                'Tinggi',
-                'Berjalan',
-                75,
-                '20 Okt 2026',
-                'Tim MotoCare'
+        $statement = $this->pdo->query(
+            'SELECT id, nama, deskripsi, created_at, updated_at
+             FROM programs
+             ORDER BY updated_at DESC, id DESC'
+        );
+
+        return array_map(
+            static fn (array $row): MotoCareProgram => new MotoCareProgram(
+                (int) $row['id'],
+                $row['nama'],
+                $row['deskripsi'],
+                $row['created_at'],
+                $row['updated_at'],
             ),
-            new MotoCareProgram(
-                'MTR-02',
-                'Pengingat servis berkala',
-                'Mengingatkan pemilik motor berdasarkan jadwal servis dan estimasi kilometer.',
-                'Jadwal servis',
-                'Tinggi',
-                'Berjalan',
-                58,
-                '24 Okt 2026',
-                'Tim MotoCare'
-            ),
-            new MotoCareProgram(
-                'MTR-03',
-                'Ringkasan kondisi motor',
-                'Menampilkan kondisi motor, odometer, serta informasi perawatan dalam dashboard.',
-                'Dashboard',
-                'Sedang',
-                'Perencanaan',
-                20,
-                '30 Okt 2026',
-                'Tim MotoCare'
-            ),
-            new MotoCareProgram(
-                'MTR-04',
-                'Referensi merek motor',
-                'Mengambil daftar merek motor dari layanan API sebagai referensi kendaraan.',
-                'Integrasi',
-                'Rendah',
-                'Selesai',
-                100,
-                '10 Okt 2026',
-                'Tim MotoCare'
-            ),
-        ];
+            $statement->fetchAll()
+        );
+    }
+
+    public function create(string $name, string $description): void
+    {
+        $statement = $this->pdo->prepare(
+            'INSERT INTO programs (nama, deskripsi) VALUES (:nama, :deskripsi)'
+        );
+        $statement->execute(['nama' => $name, 'deskripsi' => $description]);
+    }
+
+    public function update(int $id, string $name, string $description): bool
+    {
+        $statement = $this->pdo->prepare(
+            'UPDATE programs
+             SET nama = :nama, deskripsi = :deskripsi, updated_at = CURRENT_TIMESTAMP
+             WHERE id = :id'
+        );
+        $statement->execute(['id' => $id, 'nama' => $name, 'deskripsi' => $description]);
+
+        return $statement->rowCount() > 0 || $this->exists($id);
+    }
+
+    public function delete(int $id): bool
+    {
+        $statement = $this->pdo->prepare('DELETE FROM programs WHERE id = :id');
+        $statement->execute(['id' => $id]);
+
+        return $statement->rowCount() > 0;
+    }
+
+    private function exists(int $id): bool
+    {
+        $statement = $this->pdo->prepare('SELECT 1 FROM programs WHERE id = :id');
+        $statement->execute(['id' => $id]);
+
+        return $statement->fetchColumn() !== false;
     }
 }
